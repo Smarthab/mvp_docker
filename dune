@@ -1,0 +1,6 @@
+(executables
+  (names gethscript)
+  (ocamlopt_flags (-O3))
+  (libraries batteries ocaml-geth lwt lwt.unix ppx_deriving cmdliner)
+  (preprocess (pps lwt_ppx ppx_deriving.show ppx_deriving.eq))
+)
