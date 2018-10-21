@@ -1,17 +1,5 @@
 ################################################################################
-# compile geth
-FROM ubuntu:18.04 as geth_builder
-
-RUN echo `pwd`
-RUN apt-get update
-RUN apt-get -y install make m4 gcc golang git
-RUN git clone https://github.com/ethereum/go-ethereum
-RUN cd /go-ethereum && make geth
-
-
-################################################################################
 FROM ocaml/opam2:ubuntu
-
 
 ##### Install prerequired libraries
 RUN opam switch 4.06
@@ -44,15 +32,7 @@ COPY --chown=opam:opam ./dune $HOME/gethscript/
 # Perform build
 RUN eval $(opam env) && cd $HOME/gethscript && dune build gethscript.exe
 
-##### Prepare geth to run
-# Pull Geth into this second stage
-COPY --from=geth_builder /go-ethereum/build/bin/geth /usr/local/bin/
-# Open some useful ports (/!\ be careful to not do this in prod /!\)
-EXPOSE 8545 8546 30303 30303/udp
-# Copy conf. file
-COPY --chown=opam:opam ./genesis.json $HOME
-# Prepare Geth to run in /home/opam
-RUN cd $HOME && geth --datadir data init "genesis.json"
+##### Prepare script to run
 # Copy startup script and make it executable
 COPY --chown=opam:opam ./entrypoint.sh $HOME
 RUN chmod +x $HOME/entrypoint.sh
