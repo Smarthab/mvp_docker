@@ -1,5 +1,5 @@
 ################################################################################
-FROM ocaml/opam2:ubuntu
+FROM ocaml/opam2:ubuntu as builder
 
 ##### Install prerequired libraries
 RUN opam switch 4.06
@@ -17,12 +17,12 @@ RUN cd $HOME && git clone https://github.com/igarnier/ocaml-geth
 RUN eval $(opam env) && cd $HOME/ocaml-geth && jbuilder build && jbuilder install
 
 ##### Install huxiang
-RUN cd $HOME && git clone https://github.com/igarnier/huxiang
-RUN eval $(opam env) && cd $HOME/huxiang && dune build && dune install
+## RUN cd $HOME && git clone https://github.com/igarnier/huxiang
+## RUN eval $(opam env) && cd $HOME/huxiang && dune build && dune install
 
 ##### Build the mvp
-RUN cd $HOME && git clone https://github.com/Smarthab/mvp
-run eval $(opam env) && cd $HOME/mvp && dune build producer.exe processor.exe
+## RUN cd $HOME && git clone https://github.com/Smarthab/mvp
+## run eval $(opam env) && cd $HOME/mvp && dune build producer.exe processor.exe
 
 ##### Build gethscript
 # Copy gethscript from git
@@ -37,7 +37,7 @@ RUN eval $(opam env) && cd $HOME/gethscript && dune build gethscript.exe
 COPY --chown=opam:opam ./entrypoint.sh $HOME
 RUN chmod +x $HOME/entrypoint.sh
 
-##### Copy writer_secret from git
+##### Copy writer_secret
 COPY --chown=opam:opam ./writer_secret $HOME
 
 ##### Start everything
