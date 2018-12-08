@@ -17,7 +17,7 @@ let main uri secret_phrase_file =
     res
   in
   let writer = Rpc.Personal.new_account ~uri ~passphrase:secret in
-  Printf.printf "Created new account for writer: %s" (Bitstr.Hex.show writer);
+  Printf.printf "Created new account for writer: %s\n%!" (Bitstr.Hex.show writer);
   while true do
     mine uri writer 30;
     (* miner reader 30 *)

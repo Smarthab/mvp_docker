@@ -25,5 +25,8 @@ RUN geth --datadir data init "genesis.json"
 COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
+EXPOSE 19732/udp
+EXPOSE 8732/tcp 19732/tcp
+
 ##### Start everything
 ENTRYPOINT ["/entrypoint.sh"]
