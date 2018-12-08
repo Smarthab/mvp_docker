@@ -10,7 +10,7 @@ copy --from=solc_container /usr/bin/solc /usr/bin
 ##### Install prerequired libraries
 RUN opam switch 4.06
 RUN opam depext jbuilder dune lwt conf-libsodium cryptokit zarith hex bitstring yojson ocamlnet zmq dbm sqlite3
-RUN opam install jbuilder dune lwt lwt_log lwt_ppx batteries sodium cryptokit zarith hex bitstring yojson ocamlnet ppx_deriving ppx_bin_prot ppx_inline_test zmq zmq-lwt cmdliner dbm sqlite3
+RUN opam install jbuilder dune lwt lwt_log lwt_ppx batteries sodium cryptokit zarith hex bitstring yojson ppx_deriving ppx_bin_prot ppx_inline_test zmq zmq-lwt cmdliner dbm sqlite3 cohttp-lwt-unix
 RUN sudo apt-get update
 RUN sudo apt-get -y install libssh-dev
 
