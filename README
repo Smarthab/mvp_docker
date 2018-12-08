@@ -41,5 +41,3 @@ make run uri="http://w.x.y.z:8545"
 cd mvp
 make build
 make run uri="http://w.x.y.z:8545" account="0x..."
-
-# 4. Stop the miner

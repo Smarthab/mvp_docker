@@ -17,6 +17,8 @@ dune exec ./processor.exe --\
  --contract="${LOGGER}"\
  --dbfile="packets"\
  --solidity="logger.sol"\
- --uri=$2&
+ --uri=$2 &
+
+tail -f /dev/null
 
 

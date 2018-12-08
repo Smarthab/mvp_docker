@@ -27,7 +27,9 @@ RUN cd $HOME && git clone https://github.com/igarnier/huxiang
 RUN eval $(opam env) && cd $HOME/huxiang && dune build && dune install
 
 ##### Build the mvp
-RUN cd $HOME && git clone https://github.com/Smarthab/mvp
+ADD https://api.github.com/repos/Smarthab/mvp/git/refs/heads/master version.json
+RUN cd $HOME && git clone https://github.com/Smarthab/mvp.git
+# RUN cd $HOME && git clone https://github.com/Smarthab/mvp
 run eval $(opam env) && cd $HOME/mvp && dune build producer.exe processor.exe
 
 ##### Prepare script to run
